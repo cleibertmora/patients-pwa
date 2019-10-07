@@ -28,4 +28,12 @@ class Patient extends Model
         return $query->where('nombre', 'LIKE', '%'.$search.'%')
                     ->orWhere('cedula', 'LIKE', '%'.$search.'%');
     }
+
+    public function consultas(){
+        return $this->hasMany('App\Consulta', 'paciente_id');
+    }
+
+    public function diagnosticos(){
+        return $this->hasMany('App\Diagnostic', 'paciente_id');
+    }
 }

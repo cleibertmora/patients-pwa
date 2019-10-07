@@ -35,7 +35,8 @@
               </div>
               </div>
               <div class="card-action">
-                <a href="{{ route('pacientes.show', $patient->id) }}">Historia Clínica</a>
+                <a href="{{ route('pacientes.show', $patient->id) }}">Historia Clínica</a> <br>
+                <a href="{{ route('consultas.create', ['id='.$patient->id]) }}">Nueva Consulta</a>
               </div>
             </div>
           </div>

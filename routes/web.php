@@ -22,4 +22,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('/pacientes', 'PatientController');
     Route::get('/diagnostic/{id}', 'diagnosticController@index')->name('diagnosticos');
     Route::post('/diagnostic/insert', 'diagnosticController@insert')->name('diagnosticos.insert');
+    Route::resource('/consultas', 'ConsultaController')->except('index');
+    Route::get('/consultas/listado/get', 'ConsultaController@index')->name('listado');
+    //Route::get('/consultas/{idpaciente}/create', 'ConsultaController@create')->name('nuevaConsulta');
+    Route::post('/consultas/evolucion', 'ConsultaController@evolucion')->name('consultas.evolucion');
 });

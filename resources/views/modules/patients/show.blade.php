@@ -39,6 +39,22 @@
         </div>
         </div>
     </div>
+
+    <div class="row">
+        @if($consultas)
+        <h5 class="center-align">Consultas para hoy</h5>
+            @foreach ($consultas as $consulta)
+            <div class="col s12">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        El día de hoy este paciente tiene una consulta, hora de consulta desde: {{ $consulta->horaIn }} - hasta {{ $consulta->horaFin }}
+                        | <a href="{{ route('consultas.show', $consulta->id) }}" class="amber-text lighten-1">Evolucionar</a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        @endif
+    </div>
 </div>
 
 @endsection

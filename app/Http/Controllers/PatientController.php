@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth; 
 use App\Patient;
+use Carbon\Carbon;
+use DateTime;
+use Jenssegers\Date\Date;
 
 class PatientController extends Controller
 {
@@ -30,9 +33,23 @@ class PatientController extends Controller
     }
 
     public function show($id){
-        $patient = Patient::find($id);
+        $patient   = Patient::find($id);
+        $hoy = Date::now()->format('Y-m-d');
+        $consultas = array();
 
-        return view('modules.patients.show')->with('patient', $patient);
+        foreach($patient->consultas as $consulta){
+            if($consulta['fecha'] === $hoy && $consulta['status'] != 'Finalizada'){
+                $timeIn = Date::parse($consulta->horaIn)->format('g:i A');
+                $timeFin = Date::parse($consulta->horaFin)->format('g:i A');
+
+                $consulta->horaIn = $timeIn;
+                $consulta->horaFin = $timeFin;
+
+                $consultas[] = $consulta;
+            }
+        }
+
+        return view('modules.patients.show', compact('patient', 'consultas'));
     }
 
     public function edit($id){
