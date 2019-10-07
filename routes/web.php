@@ -20,8 +20,8 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('/pacientes', 'PatientController');
-    Route::get('/diagnostic/{id}', 'diagnosticController@index')->name('diagnosticos');
-    Route::post('/diagnostic/insert', 'diagnosticController@insert')->name('diagnosticos.insert');
+    Route::get('/diagnostic/{id}', 'DiagnosticController@index')->name('diagnosticos');
+    Route::post('/diagnostic/insert', 'DiagnosticController@insert')->name('diagnosticos.insert');
     Route::resource('/consultas', 'ConsultaController')->except('index');
     Route::get('/consultas/listado/get', 'ConsultaController@index')->name('listado');
     //Route::get('/consultas/{idpaciente}/create', 'ConsultaController@create')->name('nuevaConsulta');
