@@ -26,4 +26,5 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/consultas/listado/get', 'ConsultaController@index')->name('listado');
     //Route::get('/consultas/{idpaciente}/create', 'ConsultaController@create')->name('nuevaConsulta');
     Route::post('/consultas/evolucion', 'ConsultaController@evolucion')->name('consultas.evolucion');
+    Route::resource('/procedimientos', 'procedimientoController');
 });

@@ -12,4 +12,8 @@ class Procedimiento extends Model
         'precio',
         'clinica_id'
     ];
+
+    public function scopeSearch($query, $search){
+        return $query->where('procedimiento', 'LIKE', '%'.$search.'%');
+    }
 }

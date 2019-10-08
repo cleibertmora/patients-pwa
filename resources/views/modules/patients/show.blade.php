@@ -34,8 +34,18 @@
             <div class="card blue-grey lighten-4">
             <div class="card-content">
             <div class="card-title">Diagnósticos del paciente</div>
-            <div class="row valign-wrapper">
-                Diagnosticos pendientes aquí :).
+            <div class="row">
+                @if ($pendientes->isNotEmpty())
+
+                <b> Este paciente tiene tratamientos pendientes por realizar: </b> <br>
+
+                    @foreach ($pendientes as $item)
+                        {{ $item->procedimiento->procedimiento }} {{ $item->pieza ? ' - Pieza: '.$item->pieza : '' }}
+                        {{ $item->zona ? ' - Zona(s): '.$item->zona : '' }} <br>
+                    @endforeach
+                @else
+                    Ningún tratamiento pendiente por realizar.
+                @endif
             </div>
             </div>
             <div class="card-action">

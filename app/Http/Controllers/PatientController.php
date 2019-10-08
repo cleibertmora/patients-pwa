@@ -8,6 +8,7 @@ use App\Patient;
 use App\Consulta;
 use Carbon\Carbon;
 use DateTime;
+use App\Diagnostic;
 use Jenssegers\Date\Date;
 
 class PatientController extends Controller
@@ -38,6 +39,8 @@ class PatientController extends Controller
         $hoy = Date::now()->format('Y-m-d');
         $consultas = array();
         $historial = Consulta::where('paciente_id', '=', $id)->orderBy('fecha', 'DESC')->get();
+        $pendientes = Diagnostic::where('paciente_id', '=', $id)
+                      ->where('estado', '=', 'pendiente')->get();
 
         foreach($historial as $item){
             $timeIn = Date::parse($item->horaIn)->format('g:i A');
@@ -59,7 +62,7 @@ class PatientController extends Controller
             }
         }
 
-        return view('modules.patients.show', compact('patient', 'consultas', 'historial'));
+        return view('modules.patients.show', compact('patient', 'consultas', 'historial', 'pendientes'));
     }
 
     public function edit($id){
