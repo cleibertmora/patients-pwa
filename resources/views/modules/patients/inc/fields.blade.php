@@ -51,3 +51,10 @@
         {!! Form::label('datosFamiliares', 'Datos de un familiar/Dato adicional') !!}
     </div>
 </div>
+
+<div class="row">
+    <div class="input-field col s12">
+        {!! Form::textarea('enfermedades', null, ['class' => 'materialize-textarea']) !!}
+        {!! Form::label('enfermedades', 'Antecedente personal o familiar') !!}
+    </div>
+</div>

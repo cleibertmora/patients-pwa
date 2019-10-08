@@ -87,6 +87,7 @@ class ConsultaController extends Controller
         foreach($tratamientos as $tratamiento => $val){
             $diagnostico = Diagnostic::find($val);
             $diagnostico->estado = 'realizado';
+            $diagnostico->consulta_id_realizado = $idconsulta;
             $diagnostico->save();
         }
 

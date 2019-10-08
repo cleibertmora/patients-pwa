@@ -28,4 +28,8 @@ class Consulta extends Model
     {
         return $this->belongsTo('App\User', 'doctor_id', 'id');
     }
+
+    public function diagnosticos(){
+        return $this->hasMany('App\Diagnostic', 'consulta_id_realizado', 'id');
+    }
 }

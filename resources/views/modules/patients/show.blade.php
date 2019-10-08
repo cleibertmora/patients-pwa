@@ -11,10 +11,15 @@
         <div class="col s12">
             <div class="card">
             <div class="card-content">
-            <div class="card-title">{{ $patient->nombre }}</div>
+            <div class="card-title">Paciente: {{ $patient->nombre }}</div>
             <div class="row valign-wrapper">
-                HC: {{ $patient->id }} <br>
-                {{ $patient->telefono }}
+                <p>HC: {{ $patient->id }}  <br><br>
+                
+                <b>Información personal:</b>  <br>
+                
+                Cédula del paciente: {{ $patient->cedula }} {!! $patient->doctype === 'pass' ? ' <span class="green-text">Extranjero</span>' : '' !!} {!! $patient->doctype === 'ruc' ? ' <span class="teal-text">Empresa</span>' : '' !!} <br>
+                Contacto: {{ $patient->celular }} - {{ $patient->telefono }} <br>
+                Email: {{ $patient->email }} </p>
             </div>
             </div>
             <div class="card-action">
@@ -55,6 +60,51 @@
             @endforeach
         @endif
     </div>
+
+    <div class="row">
+        @if($historial->isNotEmpty())
+        
+        <h5 class="center-align">Historial de atenciones</h5>
+
+            @foreach ($historial as $item)    
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                        <b>Consulta del día: {{ $item->fecha }} hora: {{ $item->horaIn }} - {{ $item->horaIn }}</b> con el <b> {{ $item->doctor->titulo }} {{ $item->doctor->nombre }} </b> <br><br>
+
+                        <b>Tratamientos realizados:</b> <br>
+                        
+                        @if(count($item->diagnosticos) > 0)
+                            @foreach ($item->diagnosticos as $diagnostico)
+                                <ul class="collection">
+                                    <li class="collection-item"> 
+
+                                        {{ $diagnostico->procedimiento->procedimiento }}
+                                        {{ $diagnostico->pieza ? ' - Pieza: '.$diagnostico->pieza : '' }}
+                                        {{ $diagnostico->zona ? ' - Zona(s): '.$diagnostico->zona : '' }}
+
+                                    </li>
+                                </ul>
+                            @endforeach
+                        @else
+                            Ningún tratamiento se realizó en esta consulta. <br><br>
+                        @endif
+
+                        <b>Evolución:</b> <br>
+                        
+                        @if ($item->evolucion)
+                            {{ $item->evolucion }}
+                        @else
+                            Ningúna evolución para esta consulta.
+                        @endif
+
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        @endif
+    </div>
+
 </div>
 
 @endsection

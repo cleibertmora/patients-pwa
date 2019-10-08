@@ -31,12 +31,15 @@
               <div class="card-title">{{ $patient->nombre }}</div>
               <div class="row valign-wrapper">
                   HC: {{ $patient->id }} <br>
-                  {{ $patient->cedula }}
+                  Cédula del paciente: {{ $patient->cedula }} <br>
+                  Contacto: {{ $patient->celular }} - {{ $patient->telefono }} <br>
+                  Email: {{ $patient->email }} 
               </div>
               </div>
               <div class="card-action">
-                <a href="{{ route('pacientes.show', $patient->id) }}">Historia Clínica</a> <br>
-                <a href="{{ route('consultas.create', ['id='.$patient->id]) }}">Nueva Consulta</a>
+                <a href="{{ route('pacientes.edit', $patient->id) }}" class="indigo-text"><i class="material-icons">create</i></a>
+                <a href="{{ route('pacientes.show', $patient->id) }}" class="teal-text"><i class="material-icons">assignment</i></a> 
+                <a href="{{ route('consultas.create', ['id='.$patient->id]) }}"><i class="material-icons">collections_bookmark</i></a>
               </div>
             </div>
           </div>

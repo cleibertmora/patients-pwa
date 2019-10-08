@@ -32,7 +32,7 @@
 
         <div class="row">
             <div class="input-field col s12">
-                {!! Form::textarea('evolucion', null, ['class' => 'materialize-textarea']) !!}
+                {!! Form::textarea('evolucion', null, ['class' => 'materialize-textarea', 'required']) !!}
                 {!! Form::label('evolucion', 'Evolución clínica') !!}
             </div>
         </div>

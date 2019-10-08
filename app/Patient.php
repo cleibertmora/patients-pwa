@@ -16,7 +16,8 @@ class Patient extends Model
         'telefono',
         'foto',
         'datosFamiliares',
-        'clinic_id'
+        'clinic_id',
+        'enfermedades'
     ];
 
     public function clinic()
