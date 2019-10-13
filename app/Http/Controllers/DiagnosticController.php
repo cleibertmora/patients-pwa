@@ -42,4 +42,10 @@ class DiagnosticController extends Controller
 
         return redirect()->back();
     }
+
+    public function undoTratamiento($id){
+        //$diagnostic = Diagnostic::find($id);
+
+        dd('hola'. $id);
+    }
 }

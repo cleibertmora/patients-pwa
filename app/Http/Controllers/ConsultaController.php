@@ -98,4 +98,26 @@ class ConsultaController extends Controller
         
         return redirect()->route('pacientes.show', $request->idpaciente);
     }
+
+    public function quickEvolucion($id){
+        $patient = Patient::find($id); 
+
+        $doctors = User::where('clinic_id', '=', $patient->clinic_id)
+                        ->where('level', '=', 'doctor')
+                        ->pluck('nombre', 'id');
+
+       return view('modules.consultas.quickEvolucion', compact('doctors', 'patient')); 
+    }
+
+    public function quickEvolucionStore(Request $request){
+        $consultaQuick = $request->all();
+
+        $consultaQuick['fecha'] = Date::now()->format('Y-m-d');
+        $consultaQuick['horaIn'] = Date::now()->format('g:i');
+        $consultaQuick['horaFin'] = Date::now()->format('g:i');
+
+        $consulta = Consulta::create($consultaQuick);
+
+        return redirect()->route('pacientes.show', $request->paciente_id);
+    }   
 }

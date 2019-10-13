@@ -14,6 +14,17 @@
     </div>
 </div>
 
+@if(Request::is('consultas.edit'))
+    @if($consulta->evolucion)
+    <div class="row">
+        <div class="input-field col s12">
+            {!! Form::textarea('evolucion', null, ['class' => 'materialize-textarea']) !!}
+            {!! Form::label('evolucion', 'Escriba la evolución aquí') !!}
+        </div>
+    </div>
+    @endif
+@endif
+
 <div class="row">
     <div class="input-field col s12">
         {!! Form::text('fecha', null ,['class' => 'datepicker', 'required'] ) !!}

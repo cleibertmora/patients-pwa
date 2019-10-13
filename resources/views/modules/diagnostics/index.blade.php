@@ -35,16 +35,13 @@
                 @if ($diagnostico->estado === 'pendiente')
                     <span class="new badge red" data-badge-caption="">{{ $diagnostico->estado }}</span>
                 @elseif($diagnostico->estado === 'realizado')
-                    <span class="new badge blue" data-badge-caption="">{{ $diagnostico->estado }}</span>
+                    <span class="new badge blue" data-badge-caption="">{{ $diagnostico->estado }}</span> <br>
+                    {{-- Marcar como <a href="{{ route('undoTratamiento', $diagnostico->id) }}">no realizado</a> --}}
                 @else
                     <span class="new badge green" data-badge-caption="">{{ $diagnostico->estado }}</span>
                 @endif 
                 
                 <br>
-                
-                <p class="">
-                    <a href="#"  title="ajustar precio"><i class="material-icons">swap_vert</i></a>
-                </p>
 
                 </div>
             </div>
@@ -71,6 +68,8 @@
                 </div>
             </div>
             @endforeach
+        @else
+            <p class="center-align">Este paciente no tiene una consulta para evolucionar, <a href="{{ route('consultas.create', ['id='.$paciente]) }}">cree una aquí.</a></p>
         @endif
     </div>
 

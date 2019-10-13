@@ -25,8 +25,9 @@ class Patient extends Model
         return $this->belongsTo('App\Clinic');
     }
 
-    public function scopeSearch($query, $search){
-        return $query->where('nombre', 'LIKE', '%'.$search.'%')
+    public function scopeSearch($query, $clinic_id, $search){
+        return $query->where('clinic_id', '=', $clinic_id)
+                    ->where('nombre', 'LIKE', '%'.$search.'%')
                     ->orWhere('cedula', 'LIKE', '%'.$search.'%');
     }
 

@@ -71,6 +71,15 @@
         @endif
     </div>
 
+    <div class="row center-align">
+
+        <p>
+            <a href="{{ route('consultas.create', $patient->id) }}" class="btn blue-grey darken-2">Nueva consulta</a>
+            <a href="{{ route('consultas.quickEvolucion', $patient->id) }}" class="btn blue-grey">Evolución Rápida</a>
+        </p>
+
+    </div>
+
     <div class="row">
         @if($historial->isNotEmpty())
         
@@ -80,11 +89,11 @@
             <div class="col s12">
                 <div class="card">
                     <div class="card-content">
-                        <b>Consulta del día: {{ $item->fecha }} hora: {{ $item->horaIn }} - {{ $item->horaIn }}</b> con el <b> {{ $item->doctor->titulo }} {{ $item->doctor->nombre }} </b> <br><br>
-
-                        <b>Tratamientos realizados:</b> <br>
+                        <b>Consulta del día: {{ $item->fecha }} hora: {{ $item->horaIn }} - {{ $item->horaIn }}</b> con el <b> {{ $item->doctor->titulo }} {{ $item->doctor->nombre }} </b> <br>
+                        <b>Estado: {{ $item->status }} </b><br><br>
                         
                         @if(count($item->diagnosticos) > 0)
+                        <b>Tratamientos realizados:</b> <br>
                             @foreach ($item->diagnosticos as $diagnostico)
                                 <ul class="collection">
                                     <li class="collection-item"> 
@@ -96,8 +105,14 @@
                                     </li>
                                 </ul>
                             @endforeach
+                        @endif
+
+                        <b>Motivo de consulta:</b> <br>
+                        
+                        @if ($item->motivoConsulta)
+                            {{ $item->motivoConsulta }} <br><br>
                         @else
-                            Ningún tratamiento se realizó en esta consulta. <br><br>
+                            Ningún motivo para esta consulta.<br><br>
                         @endif
 
                         <b>Evolución:</b> <br>
@@ -108,6 +123,9 @@
                             Ningúna evolución para esta consulta.
                         @endif
 
+                        <br><br>
+                        
+                        <a href="{{ route('consultas.edit', [$item->id ,'id='.$patient->id]) }}">Editar Consulta</a>
                     </div>
                 </div>
             </div>

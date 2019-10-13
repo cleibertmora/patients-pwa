@@ -14,8 +14,9 @@ use Jenssegers\Date\Date;
 class PatientController extends Controller
 {
     public function index(Request $request){
+        $user = auth()->user();
         $search = $request->searchPacienteInput;
-        $patients = Patient::search($search)->orderBy('created_at', 'DESC')->simplePaginate(5);
+        $patients = Patient::search($user->clinic_id, $search)->orderBy('created_at', 'DESC')->simplePaginate(5);
         
         return view('modules.patients.index')->with('patients', $patients);
     }
