@@ -16,8 +16,13 @@ class PatientController extends Controller
     public function index(Request $request){
         $user = auth()->user();
         $search = $request->searchPacienteInput;
-        $patients = Patient::search($user->clinic_id, $search)->orderBy('created_at', 'DESC')->simplePaginate(5);
         
+        if($search){
+            $patients = Patient::search($user->clinic_id, $search)->orderBy('created_at', 'DESC')->simplePaginate(5);
+        }else{
+            $patients = Patient::where('clinic_id', '=', $user->clinic_id)->orderBy('created_at', 'DESC')->simplePaginate(5);
+        }
+
         return view('modules.patients.index')->with('patients', $patients);
     }
 
